@@ -54,11 +54,11 @@ CACHE_DIR.mkdir(exist_ok=True)
 # ✅ FIXED: LINZ Point Cloud Index Tile Layer IDs (correct layer-XXXXX format)
 # Layer IDs verified from https://data.linz.govt.nz/
 LINZ_LIDAR_LAYERS = {
-    'auckland_2024_part1': 'layer-121993',  # Auckland Part 1 LiDAR Index Tiles (2024) - MOST RECENT!
-    'auckland_2024_part2': 'layer-122590',  # Auckland Part 2 LiDAR Index Tiles (2024)
-    'auckland_north_2016': 'layer-53630',   # Auckland North LiDAR Index Tiles (2016-2018)
-    'auckland_south_2016': 'layer-53631',   # Auckland South LiDAR Index Tiles (2016-2017)
-    'auckland_2013': 'layer-51937',         # Auckland LiDAR Index Tiles (2013)
+    "auckland_2024_part1": "data:lidar-index-auckland-2024-part1",
+    "auckland_2024_part2": "data:lidar-index-auckland-2024-part2",
+    "auckland_north_2016": "data:lidar-index-auckland-north",
+    "auckland_south_2016": "data:lidar-index-auckland-south",
+    "auckland_2013": "data:lidar-index-auckland-2013",
 }
 
 # Default to most recent Auckland 2024 data
@@ -116,7 +116,7 @@ class LINZDownloader:
             f"service=WFS&"
             f"version=2.0.0&"
             f"request=GetFeature&"
-            f"typeNames={layer_id}&"  # Already in layer-XXXXX format
+            f"typeNames={layer_id}&"
             f"bbox={bbox}&"
             f"srsName=EPSG:4326&"
             f"outputFormat=json&"
