@@ -93,6 +93,7 @@ class LINZDownloader:
         )
         
         logger.info(f"Querying LINZ WFS for layer {layer_id}")
+        logger.info(f"WFS URL: {wfs_url}")
         
         try:
             response = requests.get(wfs_url, timeout=30)
@@ -103,6 +104,11 @@ class LINZDownloader:
             
             response.raise_for_status()
             data = response.json()
+            
+            logger.info(f"Response has {len(data.get('features', []))} features")
+            if 'features' in data and len(data['features']) > 0:
+                first_feature = data['features'][0]
+                logger.info(f"First feature properties keys: {list(first_feature.get('properties', {}).keys())}")
             
             tile_urls = []
             if 'features' in data:
