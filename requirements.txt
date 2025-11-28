@@ -1,0 +1,14 @@
+flask 
+flask-cors 
+gunicorn 
+numpy 
+scipy 
+shapely 
+trimesh 
+rasterio 
+laspy 
+pyproj 
+matplotlib 
+pillow 
+requests 
+scikit-learn 
