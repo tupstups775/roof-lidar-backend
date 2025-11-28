@@ -66,7 +66,10 @@ class LINZDownloader:
         self.base_url = 'https://data.linz.govt.nz/services'
     
     def get_tiles_for_location(self, lat: float, lng: float, buffer_meters: float = 50, layer_id: str = DEFAULT_LAYER) -> List[str]:
-        buffer_deg = buffer_meters / 111320.0
+        # LiDAR index tiles are typically 1km x 1km, so we need a larger buffer to intersect them
+        # Use minimum 500m buffer for tile queries, but keep smaller buffer for actual point clipping
+        query_buffer = max(buffer_meters, 500)
+        buffer_deg = query_buffer / 111320.0
         
         lon1 = lng - buffer_deg
         lon2 = lng + buffer_deg
@@ -79,6 +82,8 @@ class LINZDownloader:
         max_lat = max(lat1, lat2)
         
         bbox = f"{min_lon},{min_lat},{max_lon},{max_lat}"
+        
+        logger.info(f"Using query buffer: {query_buffer}m (requested: {buffer_meters}m)")
         
         # ✅ CORRECT WFS URL with semicolon before key
         wfs_url = (
