@@ -1,14 +1,12 @@
 services:
   - type: web
-    name: roof-pitch-calculator
+    name: roof-lidar-backend
     env: python
     region: singapore
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn main:app -k uvicorn.workers.UvicornWorker --timeout 120"
     plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn backend_production:app --host 0.0.0.0 --port $PORT
+    autoDeploy: yes
     envVars:
-      - key: LINZ_API_KEY
-        sync: false
       - key: PYTHON_VERSION
-        value: 3.11.0
-    healthCheckPath: /health
+        value: 3.12.0
