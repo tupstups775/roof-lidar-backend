@@ -1,10 +1,12 @@
 fastapi
 uvicorn
+gunicorn
 requests
-rasterio
-shapely
-pyproj
 numpy
+pydantic
 aiohttp
 cachetools
 python-multipart
+rasterio
+shapely
+pyproj
