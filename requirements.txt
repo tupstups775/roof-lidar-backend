@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+requests
+rasterio
+shapely
+pyproj
+numpy
+aiohttp
+cachetools
+python-multipart
